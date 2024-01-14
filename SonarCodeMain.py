@@ -1,29 +1,27 @@
 print("SonarCode")
-import time
+print("Hello Jeremy ! Have a good day learning Python !")
+from datetime import datetime
 
-def countdown_timer(seconds):
-    while seconds > 0:
-        days = seconds // (24 * 3600)
-        hours = (seconds // 3600) % 24
-        minutes = (seconds // 60) % 60
-        seconds_left = seconds % 60
-        print(f"Time remaining: {days} days, {hours} hours, {minutes} minutes, {seconds_left} seconds")
-        time.sleep(1)
-        seconds -= 1
+# Asking user to enter the limit date :
+limit_date_input = input("Enter the limit date : (format YYYY-MM-DD HH:MM): ")
 
-    print("Time's up!")
+# Convert limit_date in datetime object :
+limit_date = datetime.strptime(limit_date_input, "%Y-%m-%d %H:%M")
 
-def main():
-    try:
-        days = int(input("Enter the number of days: "))
-        hours = int(input("Enter the number of hours: "))
-        minutes = int(input("Enter the number of minutes: "))
-        seconds = int(input("Enter the number of seconds: "))
+# Obtain date and actual hour :
+now = datetime.now()
 
-        total_seconds = days * 24 * 3600 + hours * 3600 + minutes * 60 + seconds
-        countdown_timer(total_seconds)
-    except ValueError:
-        print("Invalid input. Please enter a valid number.")
+# Calculate the différence :
+time_left = limit_date - now
 
-if __name__ == "__main__":
-    main()
+# Extract days, hours and minutes :
+days = time_left.days
+hours, remainder = divmod(time_left.seconds, 3600)
+minutes, secondes = divmod(remainder, 60)
+
+# Display the time left :
+print(f"Time left : {days} days, {hours} hours and {minutes} minutes.")
+
+
+
+
